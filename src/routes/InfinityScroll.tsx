@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { Scrollbars } from 'rc-scrollbars';
@@ -21,7 +20,7 @@ export const Infinity = () => {
     const loadMore = async (page: number) => {    
         const url = baseUrl + page.toString()
         await sleep(0.1)
-
+        console.log(hasMore)
         try {
             setIsFetching(true)
             const response = await axios.get(url)
