@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.custom-gradient {
+  background-image: linear-gradient(red 48%, black 48%, black 52%, white 52%);
+}
+
+.center {
+    border-radius: 50%; /* 円形にするための角丸 */
+    border: 7px solid black; /* 黒色のボーダー */
+    height: 25%; /* 要素の高さを親要素の25%に設定 */
+    width: 25%; /* 要素の幅を親要素の25%に設定 */
+    background-color: #f5f5f5; /* 背景色を指定 */
+    display: grid; /* グリッド表示を設定 */
+    place-items: center; /* 要素を中央に配置 */
+}
+
+.shadow {
+    content: "";
+    width: 200px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.8);
+    filter: blur(6px);
+}
+
+.w-72.h-72 {
+    box-shadow: -20px -10px 40px rgba(0, 0, 0, .5) inset;
+}
