@@ -1,25 +1,27 @@
-import { Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 import { Root } from './routes/root'
 import { PokemonInfo } from './routes/PokemonInfo'
 import { PokemonList } from './routes/PokemonList'
 import { AiFillHome } from 'react-icons/ai'
-import { Infinity } from './routes/InfinityScroll'
+
+const homeUrl = process.env.PUBLIC_URL || "/"
 
 export const App = () => {
   return (
-    <div>
-      <div className="">
-        <Link to="/" className="">
-          <AiFillHome size={50} color={'#FFF'}/>
-        </Link>
+    <BrowserRouter>
+      <div>
+        <div className="">
+          <Link to={homeUrl} className="">
+            <AiFillHome size={50} color={'#FFF'}/>
+          </Link>
+        </div>
+        <Routes>
+          <Route path={homeUrl} element={<Root />} />
+          <Route path={homeUrl + '/PokemonList'} element={<PokemonList />}>
+            <Route path=':ID' element={<PokemonInfo />} />
+          </Route>
+        </Routes>
       </div>
-      <Routes>
-        <Route path='/' element={<Root />} />
-        <Route path='/PokemonList' element={<PokemonList />}>
-          <Route path=':ID' element={<PokemonInfo />} />
-        </Route>
-        <Route path='/inf' element={<Infinity />} />
-      </Routes>
-    </div>
+    </BrowserRouter>
   )
 }
