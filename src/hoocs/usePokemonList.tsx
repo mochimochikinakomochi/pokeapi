@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const usePokemonList = () => {
     const [pokemonList, setPokemonList] = useState<Pokemon[]>([])
-    const [isFetching, setIsFetching] = useState(false)
+    const [isFetchingPokemonList, setIsFetchingPokemonList] = useState(false)
     const baseUrl = 'https://pokeapi.co/api/v2/pokemon/'
 
     async function fetchPokemonListAPI({startID = 1, endID = startID + 30}: {startID: number, endID ?: number}) {
@@ -13,7 +13,7 @@ export const usePokemonList = () => {
         for(let i = startID; i < endID; i++) {
             const url = baseUrl + i.toString()
             try {
-                setIsFetching(true)
+                setIsFetchingPokemonList(true)
                 const response = await axios.get(url)
                 const data = response.data
                 subPokemonList = [...subPokemonList, data]
@@ -21,7 +21,7 @@ export const usePokemonList = () => {
                 console.error(error)
             }
         }
-        setIsFetching(false)
+        setIsFetchingPokemonList(false)
         setPokemonList(subPokemonList)
     }
 
@@ -30,7 +30,7 @@ export const usePokemonList = () => {
         for(let i = startID; i < endID; i++) {
             const url = baseUrl + i.toString()
             try {
-                setIsFetching(true)
+                setIsFetchingPokemonList(true)
                 const response = await axios.get(url)
                 const data = response.data
                 subPokemonList = [...subPokemonList, data]
@@ -38,9 +38,9 @@ export const usePokemonList = () => {
                 console.error(error)
             }
         }
-        setIsFetching(false)
+        setIsFetchingPokemonList(false)
         setPokemonList((pre) => [...pre, ...subPokemonList])
     }
 
-    return {pokemonList, isFetching, fetchPokemonListAPI, appendPokemonList}
+    return {pokemonList, isFetchingPokemonList, fetchPokemonListAPI, appendPokemonList}
 }
